@@ -5,55 +5,45 @@ exports.getRemovedList = async (req, res) => {
     let ritems = await RemovedProduct.find({});
     for (let r of ritems) {
         let itemid = r.itemid.toString();
-
         removedList.push({
             itemid: itemid,
             name: r.name,
             quantity: r.quantity,
             amount: r.amount,
-            dateadded: r.createdAt.toUTCString().slice(6, 16)
-
+            // dateadded: r.createdAt.toUTCString().slice(6, 16),
+            price: r.price
         });
-
     }
     res.json({ removedList });
 }
-
 exports.getRemovedProductListByName = async (req, res) => {
     const removedList = [];
     let r = await RemovedProduct.findOne({ name: req.body.name });
     if (!r) {
         return res.json({ code: 1, message: "Item Not Found!", removedList });
     }
-
     let date = r.createdAt.toUTCString().slice(6, 16);
     let itemid = r.itemid.toString();
-
     removedList.push({
         itemid: itemid,
         name: r.name,
         quantity: r.quantity,
         amount: r.amount,
-        dateadded: date
-
+        // dateadded: date,
+        price: r.price
     });
-
     res.json({ code: 1, removedList });
-
-
-
 }
 exports.getremovedProducts = (req, res) => {
-
     RemovedProduct.find({})
         .exec((error, removedproducts) => {
             if (error) return res.status(400).json({ error });
             if (removedproducts) {
                 res.json({ removedproducts });
             }
-
         });
 }
+
 exports.getTotalScrap = (req, res) => {
     let totalScrapNo = 0;
     let totalScrapRevenue = 0;

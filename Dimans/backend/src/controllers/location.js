@@ -8,8 +8,6 @@ exports.addLocation = (req, res) => {
         name: req.body.name,
         slug: slugify(req.body.name)
     }
-
-
     const loc = new Location(locationObj);
     loc.save((error, location) => {
         if (error) return res.status(400).json({ error });
@@ -17,9 +15,7 @@ exports.addLocation = (req, res) => {
             return res.json({ message: "Location added successfully!" });
         }
     });
-
 }
-
 exports.getLocations = (req, res) => {
     Location.find({})
         .exec((error, locations) => {
@@ -27,15 +23,12 @@ exports.getLocations = (req, res) => {
             if (locations) {
                 res.status(200).json({ locations });
             }
-
         });
 }
 exports.updateLocationByName = async (req, res) => {
-
     const newname = req.body.newname;
     try {
         const location = await Location.findOne({ name: req.body.oldname });
-
         if (!location) {
             return res.json({ message: "location not found" });
         }
@@ -54,6 +47,4 @@ exports.updateLocationByName = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-
-
 }

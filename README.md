@@ -1,2 +1,3 @@
 # DiMan
-My MERN stack Project for Semester 5.
+
+My MERN stack Project For Distribution Management.

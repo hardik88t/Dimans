@@ -7,11 +7,9 @@ exports.addCategory = (req, res) => {
         name: req.body.name,
         slug: slugify(req.body.name)
     }
-
     if (req.body.parentId) {
         categoryObj.parentId = req.body.parentId;
     }
-
     const cat = new Category(categoryObj);
     cat.save((error, category) => {
         if (error) return res.status(400).json({ error });
@@ -19,23 +17,18 @@ exports.addCategory = (req, res) => {
             return res.json({ message: "Category added successfully!" });
         }
     });
-
 }
-
 exports.getCategories = (req, res) => {
-
     Category.find({})
         .exec((error, categories) => {
             if (error) return res.status(400).json({ error });
             if (categories) {
                 res.json({ categories });
             }
-
         });
 }
 exports.updateCategoryByName = (req, res) => {
     const newname = req.body.newname;
-
     Category.findOne({ name: req.body.oldname })
         .exec((error, category) => {
             if (error) return res.status(400).json({ error });
@@ -50,7 +43,6 @@ exports.updateCategoryByName = (req, res) => {
                     }
                 })
             }
-
         });
 }
 

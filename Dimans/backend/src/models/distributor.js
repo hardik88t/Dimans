@@ -23,8 +23,12 @@ const distributorSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-
     },
+    role: {
+        type: String,
+        enum: ['distributor', 'wholesaler', 'customer', 'vendor', 'agency'],
+        default: 'distributor'
+    }
 
     // discategoryid: {
     //     type: mongoose.Schema.Types.ObjectId, ref: 'DisCategory', required: true
