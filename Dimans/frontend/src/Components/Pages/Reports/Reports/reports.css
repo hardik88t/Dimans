@@ -1,0 +1,41 @@
+@import '/src/index.css';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+
+.fe-reports{
+    margin:4vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.fe-reports-bar-data{
+    border:1px solid #fff;
+    border-radius: 10px;
+    width:80vw;
+    height:35vw;
+    /* margin-bottom: 4vh; */
+}
+
+.fe-reports-area-data{
+    border:1px solid #fff;
+    border-radius: 10px;
+    width:80vw;
+    height:35vw;
+    margin-bottom: 4vh;
+}
+
+.fe-reports-area-line{
+    /* margin-bottom: 4vh; */
+}
+
+.fe-reports-pie{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+

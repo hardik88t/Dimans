@@ -1,0 +1,28 @@
+@import "../../../index.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fe-widget-data {
+    /* margin:4vh 0vh 0vh 4vh; */
+    padding: 3vh;
+    height: max-content;
+    width: max-content;
+    background-color: var(--primary-main);
+    /* background-color: var(--secondary-200); */
+    border-radius: 7px;
+}
+
+/* .fe-widget {
+    width:100vw;
+} */
+
+/* .fe-widget-data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+} */

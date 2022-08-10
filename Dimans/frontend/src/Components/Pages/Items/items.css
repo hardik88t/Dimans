@@ -1,0 +1,43 @@
+@import "../../../index.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fe-items {
+    margin: 4vh;
+    width: 80vw;
+    border-radius: 15px;
+    /* border: 2px solid var(--grey-200);  */
+    /* background-color: var(--primary-main); */
+}
+
+.fe-items-table-main {
+    background-color: #8bc6ec;
+    background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+    width: 60vw;
+}
+
+.fe-items-table {
+    background-color: #6f9ebc;
+    background-image: linear-gradient(135deg, #6f9ebc 0%, #777ab8 100%);
+    width: 60vw;
+}
+
+.fe-items-table-data {
+    background-color: var(--secondary-200);
+}
+
+.fe-items-table-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fe-items-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

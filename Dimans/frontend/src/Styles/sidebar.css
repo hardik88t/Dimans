@@ -1,0 +1,124 @@
+@import "../../src/index.css";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.fe-sidebar {
+    /* this will stick to its position even when you scroll */
+    position: fixed;
+    /* this will make it stick to the top of the page */
+    /* top: 0; */
+
+    width: 275.15px;
+    /* margin-right: 8%; */
+    /* border: 5px solid #000; */
+    /* --width: max-content; */
+    background-color: #0093e9;
+    background-image: linear-gradient(147deg, #0093e9 31%, #80d0c7 100%);
+    /* background: linear-gradient(309deg, rgba(168, 27, 95, 1) 32%, rgba(204, 81, 22, 1) 75%); */
+    /* background-color: var(--primary-light-blue); */
+    height: 100vh;
+}
+
+.fe-sidebar-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 13vh;
+}
+
+.fe-sidebar-top button {
+    border: none;
+    background-color: transparent;
+    padding: 7px;
+}
+
+.fe-sidebar-top button:hover {
+    background-color: var(--primary-light-blue);
+    border-radius: 10px;
+}
+
+.fe-sidebar-links {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* height:85vh; */
+}
+
+.fe-sidebar-links li a {
+    display: flex;
+    align-items: center;
+    margin: 15px 30px;
+    padding: 10px 0px;
+    /* justify-content:center; */
+    list-style: none;
+    text-decoration: none;
+    cursor: default;
+    /* transition-duration: padding 10ms, background-color 10ms; */
+}
+
+.fe-sidebar-links li a p {
+    padding-left: 13px;
+    font-size: 2.5vh;
+    /* color:aqua; */
+    color: black;
+    /* color: var(--grey-900); */
+    /* color:var(--secondary-main); */
+}
+
+.fe-sidebar-links li a p:hover {
+    color: var(--primary-main);
+}
+
+.fe-sidebar-links li:hover {
+    background-color: var(--primary-light-blue);
+    border-radius: 30px;
+    /* padding:10px; */
+    /* width:100%; */
+
+    /* padding:10px; */
+
+    color: var(--primary-main);
+    transition-duration: 0.3s;
+}
+
+.fe-sidebar-hide {
+    display: none;
+}
+
+.fe-sidebar-icons {
+    color: black;
+}
+
+.fe-sidebar-icons:hover {
+    color: var(--primary-main);
+}
+
+.fe-sidebar-routing-link {
+    display: flex;
+    align-items: center;
+    margin: 15px 30px;
+    padding: 10px 0px;
+
+    list-style: none;
+    text-decoration: none;
+}
+
+/* .fe-sidebar-routing-link p{
+    color:var(--grey-900);
+}
+
+.fe-sidebar-routing-link p:hover{
+    color:var(--primary-light-blue);
+} */
+
+.fe-sidebar-routing-link:hover {
+    background-color: var(--primary-light-blue);
+    border-radius: 30px;
+
+    color: var(--primary-main);
+    transition-duration: 0.3s;
+}

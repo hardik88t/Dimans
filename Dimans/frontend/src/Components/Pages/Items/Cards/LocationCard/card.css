@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.fe-location-card {
+    background-color: var(--primary-main);
+    width: 20vw;
+    margin-bottom: 2vh;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.fe-location-card-new {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2vh;
+}
+
+.fe-location-card-update {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2vh;
+}
+
+.fe-location-card-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2vh;
+}

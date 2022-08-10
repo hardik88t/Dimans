@@ -1,0 +1,51 @@
+:root {
+  --primary-light-blue: #e3f2fd;
+  --primary-200: #90caf9;
+  --primary-main: #2196f3;
+  --primary-dark: #1e88e5;
+  --primary-800: #1565c0;
+
+  --secondary-light-purple: #ede7f6;
+  --secondary-200: #b39ddb;
+  --secondary-main: #673ab7;
+  --secondary-dark: #5e35b1;
+  --secondary-800: #7b5bdb;
+
+  --success-light-green: #b9f6ca;
+  --success-200: #69f0ae;
+  --success-main: #00e676;
+  --success-dark: #00c853;
+
+  --error-light-red: #ef9a9a;
+  --error-main: #f44336;
+  --error-dark: #c62828;
+
+  --warning-light-yellow: #fff8e1;
+  --warning-main: #ffe57f;
+  --warning-dark: #ffc107;
+
+  --grey-50: #fafafa;
+  --grey-100: #f5f5f5;
+  --grey-200: #eeeeee;
+  --grey-300: #e0e0e0;
+  --grey-500: #ccc9c9;
+  --grey-600: #212121;
+  --grey-700: #616161;
+  --grey-900: #212121;
+
+  --pure-white: #ffffff;
+}
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}

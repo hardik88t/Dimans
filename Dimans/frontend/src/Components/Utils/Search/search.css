@@ -1,0 +1,11 @@
+@import '../../../index.css';
+
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+
+.fe-utils-search{
+    /* margin:2vh; */
+}

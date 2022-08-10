@@ -1,0 +1,124 @@
+.fe-login-logosection {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.fe-login-page {
+    text-align: center;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.fe-login-loginform {
+    margin: auto;
+    margin-top: 8vh;
+    width: 25%;
+    height: 50vh;
+    background-color: #eeeeee;
+    border: 1px solid rgb(178, 178, 178);
+    border-radius: 10px;
+}
+
+.fe-login-heading {
+    background-color: #00e676;
+    height: 50px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.fe-login-heading h3 {
+    margin-top: 0px;
+    padding-top: 9px;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.fe-login-form {
+    margin-top: 8vh;
+}
+
+.fe-login-email input {
+    padding: 7px;
+    width: 15vw;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.fe-login-password td {
+    padding-top: 5vh;
+}
+
+.fe-login-password input {
+    padding: 7px;
+    width: 15vw;
+
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.fe-login-form-table {
+    margin: auto;
+}
+
+.fe-login-button {
+    background-color: #00e676;
+    padding: 7px;
+    border: 1px solid rgb(178, 178, 178);
+    border-radius: 5px;
+    width: 100%;
+}
+
+.fe-login-button-row td {
+    padding-top: 5vh;
+}
+
+.fe-login-button:hover {
+    background-color: #00c968;
+    transition-duration: 0.3s;
+}
+
+.fe-login-forgotpass td {
+    padding: 1.5vh;
+}
+
+.fe-login-forgotpass td a {
+    font-size: smaller;
+}
+
+.fe-login-forgotpass td a:hover {
+    color: rgba(0, 0, 0, 0.505);
+    transition-duration: 0.2s;
+}
+
+@media screen and (min-width: 360px) {
+    .fe-login-loginform {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 510px) {
+    .fe-login-loginform {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .fe-login-loginform {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .fe-login-loginform {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .fe-login-loginform {
+        width: 30%;
+    }
+}
