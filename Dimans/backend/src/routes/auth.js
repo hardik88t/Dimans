@@ -4,13 +4,12 @@ const { signup, signin, sendEmail, changePassword } = require('../controllers/au
 
 const { validateSigninRequest, validateSignupRequest, isRequestValidated } = require('../validators/auth');
 
+
+
 router.post('/login', validateSigninRequest, isRequestValidated, signin);
 router.post('/signup', validateSignupRequest, isRequestValidated, signup);
-
-// router.post('/newpassfor', sendEmail);
 router.post('/sendpasswordresetlink', sendEmail);
 
-router.post('/newpass', changePassword);
 router.post('/changepassword', changePassword);
 
 

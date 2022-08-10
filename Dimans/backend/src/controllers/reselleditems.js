@@ -1,40 +1,110 @@
 const Product = require('../models/product');
 const ReselledProduct = require('../models/reselleditems');
-const Distributor = require('../models/distributor');
+
 
 exports.addToReselled = async (req, res) => {
+
+    let snos = [];
     let no = req.body.Sno;
     let p = await Product.findOne({ name: req.body.name });
-    let d = await Distributor.findOne({ name: req.body.distributorname });
     if (!p) return res.json({ message: "product not found" });
     if (p) {
-        const mainObj = {
-            name: req.body.name,
-            itemid: p._id,
-            quantity: req.body.Sno,
-            distributorid: d._id,
-            price: p.sellingPrice * no,
-            dateReselled: req.body.dateadd,
-            // reselledNos: snos,
-        };
-        const mitem = new ReselledProduct(mainObj);
-        mitem.save(((error, item) => {
-            if (error) {
-                console.log(error);
-                return res.json({ error });
+
+        var foundr = p.removedItems.find(function (element) {
+            return element == no;
+        });
+
+        if (foundr == undefined) {
+
+            var found = p.MaintenanceItems.find(function (element) {
+                return element == no;
+            });
+            if (found == undefined) {
+
+                var founds = p.resellItems.find(function (element) {
+                    return element == no;
+                });
+                if (founds == undefined) {
+
+                    let m = await ReselledProduct.findOne({ name: req.body.name });
+                    if (!m) {
+                        if (!req.body.name || !req.body.sprice || !req.body.dateadd || !req.body.cusname || !req.body.cusemail || !req.body.cusNo || !req.body.cusaddress) {
+                            return res.json({ message: "All data is required" });
+
+                        }
+
+                        snos.push(no);
+                        const mainObj = {
+                            name: req.body.name,
+                            itemid: p._id,
+                            quantity: 1,
+                            price: req.body.sprice,
+                            dateReselled: req.body.dateadd,
+                            reselledNos: snos,
+                            customername: req.body.cusname,
+                            customeremail: req.body.cusemail,
+                            customercontactNumber: req.body.cusNo,
+                            customeraddress: req.body.cusaddress,
+                        };
+                        const mitem = new ReselledProduct(mainObj);
+                        mitem.save(((error, item) => {
+                            if (error) {
+                                console.log(error);
+                                return res.json({ error });
+                            }
+
+
+                        }));
+                    }
+                    if (m) {
+
+                        m.reselledNos.push(no);
+                        let q = m.quantity + 1;
+                        let price = m.price + parseInt(req.body.sprice);
+                        var myquery = { name: req.body.name };
+                        var newvalues = {
+                            $set: {
+                                reselledNos: m.reselledNos, quantity: q, dateReselled: req.body.dateadd, customername: req.bodycusname,
+
+                                price: price,
+                                customeremail: req.body.cusemail,
+                                customercontactNumber: req.body.cusNo,
+                                customeraddress: req.body.cusaddress,
+                            }
+                        };
+                        ReselledProduct.updateOne(myquery, newvalues, function (err, item) {
+                            if (err) { return res.status(400).json({ err }); }
+                        })
+
+                    }
+                    p.resellItems.push(no);
+                    let q = p.CurrentQuantity - 1;
+
+                    var myquery = { name: req.body.name };
+                    var newvalues = { $set: { resellItems: p.resellItems, CurrentQuantity: q } }
+                    Product.updateOne(myquery, newvalues, function (error, item) {
+                        if (error) {
+                            res.status(400).json({ error });
+                        }
+                    })
+
+                    res.json({ message: "product added to reselled successfully!" });
+
+                }
+                else {
+                    res.json({ message: "product is already Selled" });
+                }
             }
-        }));
-        p.resellItems.push(no);
-        let q = p.quantity - no;
-        var myquery = { name: req.body.name };
-        var newvalues = { $set: { resellItems: p.resellItems, quantity: q } }
-        Product.updateOne(myquery, newvalues, function (error, item) {
-            if (error) {
-                res.status(400).json({ error });
+            else {
+                res.json({ message: "product is under Maintenance" });
             }
-        })
-        res.json({ message: "product added to reselled successfully!" });
+        }
+
+        else {
+            res.json({ message: "product already removed" });
+        }
     }
+
 }
 
 
@@ -43,8 +113,10 @@ exports.getReselledList = async (req, res) => {
     let mitems = await ReselledProduct.find({});
     for (let m of mitems) {
         let itemid = m.itemid.toString();
-        let distributorid = m.distributorid.toString();
+
         let datereselled = m.dateReselled.toUTCString().slice(6, 16);
+
+
         // console.log(m.quantity);
         reselledList.push({
             itemid: itemid,
@@ -52,8 +124,10 @@ exports.getReselledList = async (req, res) => {
             qty: m.quantity,
             dateReselled: datereselled,
             price: m.price,
-            distributorid: distributorid
+            customer: m.customername
+
         });
+
     }
     res.json({ reselledList });
 }
@@ -74,10 +148,11 @@ exports.getReselledProductListByName = async (req, res) => {
     let m = await ReselledProduct.findOne({ name: req.body.name });
     if (!m) {
         res.json({ message: "item not found", reselledList });
+
     }
     if (m) {
         let itemid = m.itemid.toString();
-        let distributorid = m.distributorid.toString();
+
         let datereselled = m.dateReselled.toUTCString().slice(6, 16);
 
 
@@ -88,7 +163,7 @@ exports.getReselledProductListByName = async (req, res) => {
             qty: m.quantity,
             dateReselled: datereselled,
             price: m.price,
-            distributorid: distributorid
+            customer: m.customername
 
         });
 

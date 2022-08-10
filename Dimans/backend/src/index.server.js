@@ -5,14 +5,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoutes = require('./routes/auth');
 const categoryRoutes = require('./routes/category');
-
-// const maintenanceRoutes = require('./routes/maintenance');
+// const discategoryRoutes = require('./routes/discategory');
 const distributorRoutes = require('./routes/distributor');
 const locationRoutes = require('./routes/location');
 const productRoutes = require('./routes/product');
 const scrapRoutes = require('./routes/removedproduct');
 const resellRoutes = require('./routes/reselleditems');
-const { requireSignin } = require('./common-middleware');
+// const agencyRoutes = require('./routes/agency');
 
 
 const http = require('http');
@@ -20,28 +19,22 @@ const server = http.createServer(app);
 env.config();
 
 mongoose.connect(
-    `mongodb://localhost:${process.env.MONGO_DB_PORT}/${process.env.MONGO_DB_DATABASE}`,
+    `mongodb://localhost:27017/Dimans`,
 ).then(() => {
     console.log("Database connected");
 });
 
 app.use(cors());
 app.use(express.json());
-// app.use(() => {
-//     // count++;
-//     console.log('req');
-// })
 app.use('/api', userRoutes);
-// Authenticated routes
-// app.use(requireSignin);
 app.use('/api', categoryRoutes);
+// app.use('/api', discategoryRoutes);
 app.use('/api', distributorRoutes);
 app.use('/api', locationRoutes);
 app.use('/api', productRoutes);
 app.use('/api', scrapRoutes);
 app.use('/api', resellRoutes);
 // app.use('/api', maintenanceRoutes);
-
 
 app.get('/', (req, res, next) => {
     res.send("Hello from server");

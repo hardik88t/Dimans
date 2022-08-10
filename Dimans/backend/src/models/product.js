@@ -8,11 +8,11 @@ const productSchema = new mongoose.Schema({
         trim: true,
     },
 
-    price: {
+    getPrice: {
         type: Number,
         required: true
     },
-    sellingPrice: {
+    sellPrice: {
         type: Number,
         required: true
     },

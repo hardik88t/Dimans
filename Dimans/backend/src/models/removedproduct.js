@@ -24,12 +24,10 @@ const removedproductSchema = new mongoose.Schema({
         type: Number,
         requires: true
     },
-    price: {
-        type: Number,
-        requires: true
-    },
     removedNos: [Number],
-    // updatedAt: Date,
+    updatedAt: Date,
+
+
 }, { timestamps: true });
 
 

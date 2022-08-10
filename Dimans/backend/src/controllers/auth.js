@@ -21,6 +21,7 @@ exports.signup = (req, res) => {
             lastName,
             email,
             password
+
         } = req.body;
         const _user = new User({
             firstName,
@@ -45,11 +46,15 @@ exports.signup = (req, res) => {
     });
 }
 exports.signin = (req, res) => {
+
     User.findOne({ email: req.body.email }).exec((error, user) => {
+
+
         if (user) {
+
             if (user.authenticate(req.body.password)) {
-                const token = jwt.sign({ _id: user._id, role: user.role },
-                    process.env.JWT_SECRET, { expiresIn: '1d' });
+
+                const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
                 const { _id, firstName, lastName, email, role, fullName } = user;
                 res.json({
                     code: 0,
@@ -79,19 +84,21 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-//Forget Password
+
 exports.sendEmail = async (req, res) => {
     const email = req.body.email;
     console.log(email);
+
+
     if (!email) {
         res.status(400).json({ message: "Enter your email" })
     }
+
     const userfind = await User.findOne({ email: email });
     if (!userfind) {
         res.status(400).json({ message: "user with given email doesn't exist" })
     }
-    const t = jwt.sign({ _id: userfind._id, role: userfind.role },
-        process.env.JWT_SECRET, { expiresIn: '1h' });
+    const t = jwt.sign({ _id: userfind._id, role: userfind.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
     let token = await Otp.findOne({ userId: userfind._id });
     if (!token) {
         token = await new Otp({
@@ -99,34 +106,26 @@ exports.sendEmail = async (req, res) => {
             token: t,
         }).save();
     }
+
+
     const mailOptions = {
+
         from: process.env.EMAIL,
         to: req.body.email,
         subject: 'Sending Email for password reset',
-        text: 'This link is valid for 2 MINUTES',
-        link: `http://localhost:${process.env.PORT}/api/newpass?uid=${userfind._id}&token=${token.token}`
+        text: `This link is valid for 2 MINUTES http://localhost:4000/ForgotPassword/${userfind._id}/${token.token}`
     };
-    console.log(mailOptions);
+
     transporter.sendMail(mailOptions, (error, info) => {
         // console.log("abc");
         if (error) {
-            // console.log(error);
-            res.status(400).json({
-                message: "email not send",
-                userfind: userfind._id,
-                token: token.token,
-                link: mailOptions.link
-            })
+            console.log(error);
+            res.status(400).json({ message: "email not send" })
         } else {
             console.log('Email sent: ' + info.response);
-            // res.json({
-            //     message: "password reset link successfully send to your meail"
-            // })
-            return res.status(400).json({
-                link: mailOptions.link,
-                message: 'password reset link successfully send to your meail'
-            });
+            res.json({ message: "password reset link successfully send to your meail" })
         }
+
     })
 }
 
@@ -134,15 +133,7 @@ exports.sendEmail = async (req, res) => {
 
 
 exports.changePassword = async (req, res) => {
-    //get info from url
-    const { id, token } = req.params;
-
-
-    //get info from body
-    const { password } = req.body;
-
-
-    // var id = req.body.id;
+    var id = req.body.id;
 
     try {
         let user = await User.findById(id);
@@ -158,11 +149,9 @@ exports.changePassword = async (req, res) => {
             user.password = req.body.password;
             await user.save();
             await token.delete();
-            console.log("password changed");
             res.send({ message: "password reset sucessfully." });
         }
     } catch (error) {
-        console.log("An error occured");
         res.send({ message: "An error occured" });
         console.log(error);
     }
